@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#8B0303</color>
+    <color name="colorPrimaryDark">#6d0202</color>
+    <color name="colorAccent">#b71c1c</color>
+    <color name="black">#000</color>
+    <color name="white">#FFF</color>
+    <color name="green">#33cc33</color>
+    <color name="red">#E71411</color>
+    <color name="yellow">#FFFF00</color>
+    <color name="week_not_selected">#ffcc99</color>
+
+</resources>
