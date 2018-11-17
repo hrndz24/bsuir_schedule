@@ -78,6 +78,18 @@ public class LessonAdapter extends ArrayAdapter<Lesson> {
 
             TextView employee = (TextView) listItemView.findViewById(R.id.lesson_employee);
             employee.setVisibility(View.GONE);
+
+            TextView startTime = (TextView) listItemView.findViewById(R.id.lesson_start_time);
+            startTime.setVisibility(View.GONE);
+
+            TextView endTime = (TextView) listItemView.findViewById(R.id.lesson_end_time);
+            endTime.setVisibility(View.GONE);
+
+            TextView auditory = (TextView) listItemView.findViewById(R.id.lesson_auditory);
+            auditory.setVisibility(View.GONE);
+
+            View lessonType = (View) listItemView.findViewById(R.id.lesson_type);
+            lessonType.setVisibility(View.GONE);
         }
 
         // Return the whole list item layout (containing 2 TextViews)

@@ -3,13 +3,14 @@ package com.example.android.bsuirschedule;
 
 public class Lesson {
 
-    private String mStartTime=WEEK_DAY;
+
     private String mEndTime;
     private String mName;
     private String mAuditory;
     private Employee mEmployee;
     private String mType;
-    private static final String WEEK_DAY ="abc";
+    private static final String WEEK_DAY = "abc";
+    private String mStartTime  = WEEK_DAY;
 
 
     public Lesson(String name, String type, Employee employee,
@@ -25,6 +26,7 @@ public class Lesson {
     public Lesson(String weekDay){
         mName = weekDay;
     }
+
     public String getLessonName(){
         return mName;
     }

@@ -1,66 +1,46 @@
 package com.example.android.bsuirschedule;
 
 import android.os.Bundle;
+
 import android.support.v4.app.Fragment;
-import android.util.Log;
+
+import android.support.v4.app.LoaderManager;
+
+import android.support.v4.content.Loader;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
+
 
 /**
  * Fragment that displays "Monday".
  */
 public class FirstWeekFragment extends Fragment {
 
-    ScheduleAsyncTask task;
+    private LessonAdapter mAdapter;
 
-    /** Tag for the log messages */
-    public static final String LOG_TAG = MainActivity.class.getSimpleName();
-
-    private static final String USGS_REQUEST_URL =
-            "https://journal.bsuir.by/api/v1/studentGroup/schedule?studentGroup=873901";
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_week, container, false);
 
-        task = new ScheduleAsyncTask(this, 1);
-        //URL url = createUrl(USGS_REQUEST_URL);
-        //ArrayList<Lesson> lessons = task.doInBackground(url);
-        task.execute();
-        //ArrayList<Lesson> lessons = task.doInBackground(USGS_REQUEST_URL);
+        // Get a reference to the LoaderManager, in order to interact with loaders.
+        LoaderManager loaderManager = getLoaderManager();
 
+        // Initialize the loader. Pass in the int ID constant defined above and pass in null for
+        // the bundle. Pass in this activity for the LoaderCallbacks parameter (which is valid
+        // because this activity implements the LoaderCallbacks interface).
+
+        ListView listView = (ListView) rootView.findViewById(R.id.lessons_list);
+        mAdapter = new LessonAdapter(getActivity(), new ArrayList<Lesson>());
+
+        listView.setAdapter(mAdapter);
+        LessonLoadManager callbacks = new LessonLoadManager(this, 1, mAdapter);
+
+        loaderManager.initLoader(0, null, callbacks);
         return rootView;
-    }
-
-    private URL createUrl(String stringUrl) {
-        URL url = null;
-        try {
-            url = new URL(stringUrl);
-        } catch (MalformedURLException exception) {
-            Log.e(LOG_TAG, "Error with creating URL", exception);
-            return null;
-        }
-        return url;
-    }
-    private void updateUi(ArrayList<Lesson> lessons) {
-        // set adapter
-        // Display the earthquake title in the UI
-        LessonAdapter adapter = new LessonAdapter(getActivity(), lessons);
-        //ArrayAdapter<String> adapter = new ArrayAdapter<>(mContext.getActivity(), R.layout.lesson_text_item, lessons);
-        ListView listView = (ListView) getView().findViewById(R.id.lessons_list);
-        listView.setAdapter(adapter);
-
-    }
-    @Override
-    public void onStart() {
-
-
-        super.onStart();
     }
 }
 
